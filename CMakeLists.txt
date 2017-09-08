@@ -4,19 +4,15 @@ project(sandbox)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES src/main.cpp)
-
-#set(BOOST_ROOT /usr/local/Cellar/boost/1.65.0)
-#find_package(Boost 1.65.0)
-#
-#if(NOT Boost_FOUND)
-#    message(FATAL_ERROR "Could not find boost!")
-#endif()
-
-find_package(Boost)
-IF (Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIR})
-endif()
+set(Boost_USE_MULTITHREAD ON)
+set(Boost_ADDITIONAL_VERSIONS "1.65" "1.65.0")
+find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 add_executable(sandbox ${SOURCE_FILES})
-target_link_libraries (sandbox ${Boost_LIBRARIES})
+
+if (Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIR})
+    target_link_libraries(sandbox ${Boost_LIBRARIES})
+    # target_link_libraries(sandbox ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+endif()
 

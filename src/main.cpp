@@ -1,16 +1,12 @@
-#include <cstdio>
-#include <boost/array.hpp>
-#include <boost/regex.hpp>
-#include <boost/optional.hpp>
-
+//#include <boost/filesystem.hpp>
 #include <string>
-#include <iostream>
-#include <utility>
-#include <memory>
+#include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
-//using namespace boost;
+namespace boostfs = boost::filesystem;
 
 auto main(int argc, char *argv[]) -> int {
     std::cout << "Hello, World!" << std::endl;
