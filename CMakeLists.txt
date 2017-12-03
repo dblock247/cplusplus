@@ -8,7 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../build)
 find_package(Boost COMPONENTS REQUIRED system filesystem program_options)
 find_package(SDL2 REQUIRED sdl2)
 
-add_executable(sandbox main.cpp)
+add_executable(sandbox main.cpp command_line_options.cpp command_line_options.hpp)
 
 if (Boost_FOUND)
     message("-- Boost Include Directory: " ${Boost_INCLUDE_DIR})
