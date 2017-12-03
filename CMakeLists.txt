@@ -1,18 +1,26 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.9)
 project(sandbox)
 
 set(CMAKE_CXX_STANDARD 11)
-
-set(SOURCE_FILES src/main.cpp)
 set(Boost_USE_MULTITHREAD ON)
-set(Boost_ADDITIONAL_VERSIONS "1.65" "1.65.0")
-find_package(Boost COMPONENTS system filesystem REQUIRED)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../build)
 
-add_executable(sandbox ${SOURCE_FILES})
+find_package(Boost COMPONENTS REQUIRED system filesystem program_options)
+find_package(SDL2 REQUIRED sdl2)
+
+add_executable(sandbox main.cpp)
 
 if (Boost_FOUND)
+    message("-- Boost Include Directory: " ${Boost_INCLUDE_DIR})
+    message("--   Version: " ${Boost_VERSION})
+    message("--   Boost Include Directory: " ${Boost_INCLUDE_DIR})
     include_directories(${Boost_INCLUDE_DIR})
     target_link_libraries(sandbox ${Boost_LIBRARIES})
-    # target_link_libraries(sandbox ${Boost_LIBRARIES} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 endif()
 
+if (SDL2_FOUND)
+    message("-- SDL Include Directory: " ${SDL2_INCLUDE_DIR})
+    message("--   SDL2 Include Directory: " ${SDL2_INCLUDE_DIR})
+    include_directories(${SDL2_INCLUDE_DIR})
+    target_link_libraries(sandbox ${SDL2_LIBRARY})
+endif()
